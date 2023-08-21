@@ -97,39 +97,21 @@ def create_app(test_config=None):
         connection.close()
         return data
 
-    @app.route('/servo')
-    def servo():
+    @app.route('/tail-move')
+    def tailMove():
         from scripts.Servo import Servo
 
-        servo = Servo(12.5)
-        servo.activate()
+        servo = Servo(17)
+        servo.tailMove()
         return "ok"
-    #def servo():
-        #import RPi.GPIO as GPIO
-        #import time
 
-        #servoPIN = 24
-        #GPIO.setmode(GPIO.BCM)
-        #GPIO.setup(servoPIN, GPIO.OUT)
+    @app.route('/activate-micro')
+    def activateMicro():
+        from scripts.Micro import Micro
 
-        #p = GPIO.PWM(servoPIN, 50)
-        #p.start(2.5)
-
-        #while True:
-        #    p.ChangeDutyCycle(4.5)
-        #    time.sleep(0.5)
-        #    p.ChangeDutyCycle(6.5)
-        #    time.sleep(0.5)
-        #    p.ChangeDutyCycle(10.5)
-        #    time.sleep(0.5)
-        #    p.ChangeDutyCycle(12.5)
-        #    time.sleep(0.5)
-        #    p.ChangeDutyCycle(10.5)
-        #    time.sleep(0.5)
-        #    p.ChangeDutyCycle(8.5)
-        #    time.sleep(0.5)
-        #    p.ChangeDutyCycle(6.5)
-        #    time.sleep(0.5)
+        micro = Micro()
+        return micro.activateMicro()
+        
 
     return app
 

@@ -1,14 +1,28 @@
 import RPi.GPIO as GPIO
+import time
 
 
 class Servo:
-    def __init__(self, angle):
-        servo_pin = 24
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(servo_pin, GPIO.OUT)
-        self.angle = angle
-        self.p = GPIO.PWM(servo_pin, 50)
+    def __init__(self, pin):
+        self.pin = pin
 
-    def activate(self):
-        self.p.ChangeDutyCycle(self.angle)
-        return 'salut'
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.pin, GPIO.OUT)
+        self.p = GPIO.PWM(self.pin, 50) #GPIO17 for PWM with 50Hz
+    
+
+    def tailMove(self):
+        self.p.start(2.5) #Initialization
+        i = 0
+        while (i < 5):
+            self.p.ChangeDutyCycle(5)
+            time.sleep(0.2)
+            self.p.ChangeDutyCycle(7.5)
+            time.sleep(0.2)
+            self.p.ChangeDutyCycle(10)
+            time.sleep(0.2)
+            self.p.ChangeDutyCycle(7.5)
+            time.sleep(0.2)
+            i += 1
+        
+        GPIO.cleanup()
