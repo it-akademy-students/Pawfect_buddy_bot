@@ -99,31 +99,37 @@ def create_app(test_config=None):
 
     @app.route('/servo')
     def servo():
-        import RPi.GPIO as GPIO
-        import time
+        from scripts.Servo import Servo
 
-        servoPIN = 24
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(servoPIN, GPIO.OUT)
+        servo = Servo(12.5)
+        servo.activate()
+        return "ok"
+    #def servo():
+        #import RPi.GPIO as GPIO
+        #import time
 
-        p = GPIO.PWM(servoPIN, 50)
-        p.start(2.5)
+        #servoPIN = 24
+        #GPIO.setmode(GPIO.BCM)
+        #GPIO.setup(servoPIN, GPIO.OUT)
 
-        while True:
-            p.ChangeDutyCycle(4.5)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(6.5)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(10.5)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(12.5)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(10.5)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(8.5)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(6.5)
-            time.sleep(0.5)
+        #p = GPIO.PWM(servoPIN, 50)
+        #p.start(2.5)
+
+        #while True:
+        #    p.ChangeDutyCycle(4.5)
+        #    time.sleep(0.5)
+        #    p.ChangeDutyCycle(6.5)
+        #    time.sleep(0.5)
+        #    p.ChangeDutyCycle(10.5)
+        #    time.sleep(0.5)
+        #    p.ChangeDutyCycle(12.5)
+        #    time.sleep(0.5)
+        #    p.ChangeDutyCycle(10.5)
+        #    time.sleep(0.5)
+        #    p.ChangeDutyCycle(8.5)
+        #    time.sleep(0.5)
+        #    p.ChangeDutyCycle(6.5)
+        #    time.sleep(0.5)
 
     return app
 
