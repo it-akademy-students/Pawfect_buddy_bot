@@ -1,33 +1,32 @@
 import React from 'react';
-import axios from 'axios';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import InscriptionController from './controllers/InscriptionController';
+import LoginController from './controllers/LoginController';
+import ForgotPasswordController from './controllers/ForgotPasswordController';
+import ProfileController from './controllers/ProfileController';
+import HomeController from './controllers/HomeController';
+import PairController from './controllers/PairController';
+import ModeController from './controllers/ModeController';
+import RecordController from './controllers/RecordController';
+import ResetController from './controllers/ResetController';
+
 
 const App = () => {
-  const handleClick = () => {
-    const api = axios.create({
-      baseURL: 'http://127.0.0.1:5000',
-      headers: {
-        Accept: 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'true',
-        'Content-Type': 'application/json'
-      },
-      withCredentials: true
-    });
-
-    api.get('/test')
-      .then(({data}) => {
-        console.log('Data:', data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  };
-
   return (
-    <div>
-      <h1>Mon application React</h1>
-      <button onClick={handleClick}>Effectuer la requête</button>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomeController />} />
+        <Route path="/inscription" element={<InscriptionController />} />
+        <Route path="/login" element={<LoginController />} />
+        <Route path="/forgotpassword" element={<ForgotPasswordController />} />
+        <Route path="/profile" element={<ProfileController />} />
+        
+        <Route path="/configuration" element={<PairController />} />
+        <Route path="/mode" element={<ModeController />} />
+        <Route path="/record" element={<RecordController />} />
+        <Route path="/reset" element={<ResetController />} />
+      </Routes>
+    </Router>
   );
 };
 
