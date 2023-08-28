@@ -3,7 +3,8 @@ import React from 'react';
 
 const Record = () => {
   return (
-    <div class='bg-pink'>
+    <div className='d-flex justify-content-center align-items-center vh-100'>
+      <div className='bg-pink fs-4 text-white br-rad p-3'>
         <h2>My Records</h2>
         <h3>Audio(s)</h3>
         <form method='POST' action=''>
@@ -22,11 +23,12 @@ const Record = () => {
                     <td></td>
                 </tr>
             </tbody>
-            <button className='bg-blue dark-pink'>Download selected</button>
-            <button className='bg-blue dark-pink'>Delete selected</button>
+            <button className='bg-blue dark-pink rounded m-2 fs-4'>Download selected</button>
+            <button className='bg-blue dark-pink rounded m-2 fs-4'>Delete selected</button>
           </table>
         </form>
       </div>
+    </div>
   );
 };
 

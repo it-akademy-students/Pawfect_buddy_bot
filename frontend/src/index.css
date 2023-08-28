@@ -19,7 +19,10 @@ code {
 .bg-blue {
   background-color: #AAD9DD;
 }
-.bg-transparent {
+.bg-extra-light-blue {
+  background-color: #E6EFEF;
+}
+.bg-pale {
   background-color: rgba(255, 255, 255, 0.5);
 }
 .pink {
@@ -48,4 +51,32 @@ button:focus,
 input[type=submit]:focus {
   background-color: #C93C67;
   color: #E8AABF;
+}
+input::placeholder {
+  color: white;
+}
+nav ul{
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+.nav-link, .nav {
+  text-decoration: none !important;
+  color: #C93C67 !important;
+  font-weight: 500 !important;
+}
+.nav-link:active {
+  text-decoration: underline !important;
+  color: #C93C67 !important;
+}
+.nav-link:hover {
+  color: #E8AABF !important;
+}
+
+input, button {
+  border: 0px;
+}
+.br-rad {
+  border-radius : 7%;
 }
