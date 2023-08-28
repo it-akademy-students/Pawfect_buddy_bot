@@ -78,5 +78,8 @@ input, button {
   border: 0px;
 }
 .br-rad {
-  border-radius : 7%;
+  border-radius : 5% 5% 5% 5%;
+}
+.a-white {
+  color: #ffffff;
 }
