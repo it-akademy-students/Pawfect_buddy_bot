@@ -2,10 +2,10 @@
 import RPi.GPIO as GPIO
 import time
 
-in1 = 17
-in2 = 18
-in3 = 27
-in4 = 22
+in1 = 18
+in2 = 23
+in3 = 24
+in4 = 25
 
 # careful lowering this, at some point you run into the mechanical limitation of how quick your motor can move
 step_sleep = 0.002

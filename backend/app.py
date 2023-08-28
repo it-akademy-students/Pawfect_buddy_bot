@@ -1,17 +1,26 @@
 import os
+import time
 from flask import Flask, Response, request, jsonify, make_response
-from flask_cors import CORS
 import sqlite3
+from classes.Cors import Cors
+from classes.Auth import Auth
+from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, unset_jwt_cookies, jwt_required, JWTManager
 
 
 def create_app(test_config=None):
     # create and configure the app
+    global app
     app = Flask(__name__, instance_relative_config=True)
-    cors = CORS(app)
+
+    Cors(app)
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'pawefect_buddy_bot.sqlite'),
     )
+
+    import subprocess
+    subprocess.Popen(["python3", "./Scripts/StreamCamera.py"])
+    #app.run(host= '0.0.0.0')
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -26,94 +35,88 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/')
-    def index():
-        import RPi.GPIO as GPIO
-        import time
-        from gpiozero import Motor, LED
-        # import custom_motor
+    @app.route("/")
+    def web_interface():
+        html = open("web_interface.html")
+        response = html.read().replace('\n', '')
+        html.close()
+        return response
 
-        # Module GPIO: BOARD ou BCM (numérotation comme la sérigraphie de la carte ou comme le chip) #
-        GPIO.setmode(GPIO.BCM)
 
-        # Définition des broches GPIO #
-        GPIO_TRIGGER = 16
-        GPIO_ECHO = 12
+    @app.route("/avancer")
+    def avancer():
+        activate = request.args.get("on")
+        from Scripts.Motors import Motors
 
-        # Définition des broches en entrées ou en sortie #
-        GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
-        GPIO.setup(GPIO_ECHO, GPIO.IN)
+        motors = Motors()
+        return motors.avancer(activate)
 
-        motor = Motor(17, 18)
-        motorSwitch = LED(27)
+    @app.route("/reculer")
+    def reculer():
+        activate = request.args.get("on")
+        from Scripts.Motors import Motors
 
-        def toggleSwitch(distance):
-            global motorSpeedForward
-            if distance >= 4:
-                motorSwitch.on()
-                motor.forward(1)
-            elif distance < 4:
-                motorSwitch.off()
+        motors = Motors()
+        return motors.reculer(activate)
 
-        def distance():
-            # Mise à l'état haut de la broche Trigger #
-            GPIO.output(GPIO_TRIGGER, True)
+    @app.route("/gauche")
+    def gauche():
+        activate = request.args.get("on")
+        from Scripts.Motors import Motors
 
-            # Mise à l'état bas de la broche Trigger aprés 10 µS #
-            time.sleep(0.0000001)
-            GPIO.output(GPIO_TRIGGER, False)
+        motors = Motors()
+        return motors.gauche(activate)
 
-            StartTime = time.time()
-            StopTime = time.time()
+    @app.route("/droite")
+    def droite():
+        activate = request.args.get("on")
+        from Scripts.Motors import Motors
 
-            # Enregistrement du temps de départ des ultrasons #
-            while GPIO.input(GPIO_ECHO) == 0:
-                StartTime = time.time()
+        motors = Motors()
+        return motors.droite(activate)
 
-            # Enregistrement du temps d'arrivés des ultrasons #
-            while GPIO.input(GPIO_ECHO) == 1:
-                StopTime = time.time()
+    @app.route('/activate-micro')
+    def activateMicro():
+        from Scripts.Micro import Micro
 
-            # Calcul de la durée de l'aller-retour des US #
-            TimeElapsed = StopTime - StartTime
-            # On multiplue la durée par la vitesse du son: 34300 cm/s #
-            # et on divise par deux car il s'agit d'un aller et retour. #
-            distance = (TimeElapsed * 34300) / 2
-
-            toggleSwitch(distance)
-
-        while True:
-            distance()
-        return "index"
-
-    @app.route('/test')
-    def test():
-        connection = sqlite3.connect('./database/database.db')
-        connection.row_factory = sqlite3.Row
-        users = connection.execute('SELECT * FROM users').fetchall()
-        data = []
-        for user in users:
-            data.append([x for x in user])
-        connection.close()
-        return data
+        micro = Micro()
+        micro.activateMicro()
+        return "ok"
+       
 
     @app.route('/tail-move')
     def tailMove():
-        from scripts.Servo import Servo
+        from Scripts.Servo import Servo
 
         servo = Servo(17)
         servo.tailMove()
         return "ok"
 
-    @app.route('/activate-micro')
-    def activateMicro():
-        from scripts.Micro import Micro
+    @app.route('/give-croquettes')
+    def giveCroquettes():
+        from Scripts.StepMotor import StepMotor
 
-        micro = Micro()
-        return micro.activateMicro()
-        
+        stepmotor = StepMotor()
+        stepmotor.giveCroquettes()
+        return 'ok'
+
+    @app.route('/toggle-camera')
+    def toggleCamera():
+        import subprocess
+        subprocess.Popen(["python3", "./Scripts/StreamCamera.py"])
+        return 'ok'
+    
+    @app.route('/toggle-automatic-mode')
+    def toggleAutoMode():
+        from Scripts.Distance import Distance
+        from Scripts.AutoMode import AutoMode
+        front = Distance()
+        front_distance = front.getFrontDistance()
+        time.sleep(0.2)
+        return "Distance mesurée = %.1f cm" % front_distance
 
     return app
+
 
 # if __name__ == '__main__':
 #   os.system("sudo rm -r  ~/.cache/chromium/Default/Cache/*")

@@ -6,6 +6,7 @@ class Servo:
     def __init__(self, pin):
         self.pin = pin
 
+        GPIO.cleanup()    
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.pin, GPIO.OUT)
         self.p = GPIO.PWM(self.pin, 50) #GPIO17 for PWM with 50Hz
@@ -25,4 +26,4 @@ class Servo:
             time.sleep(0.2)
             i += 1
         
-        GPIO.cleanup()
+        
