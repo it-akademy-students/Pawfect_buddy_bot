@@ -29,8 +29,8 @@ class Motors:
             GPIO.output(self.motor1B, GPIO.LOW)
             GPIO.output(self.motor1E, GPIO.HIGH)
 
-            GPIO.output(self.motor2A, GPIO.HIGH)
-            GPIO.output(self.motor2B, GPIO.LOW)
+            GPIO.output(self.motor2A, GPIO.LOW)
+            GPIO.output(self.motor2B, GPIO.HIGH)
             GPIO.output(self.motor2E, GPIO.HIGH)
         else:
             GPIO.output(self.motor1E, GPIO.LOW)
@@ -45,8 +45,8 @@ class Motors:
             GPIO.output(self.motor1B, GPIO.HIGH)
             GPIO.output(self.motor1E, GPIO.HIGH)
 
-            GPIO.output(self.motor2A, GPIO.LOW)
-            GPIO.output(self.motor2B, GPIO.HIGH)
+            GPIO.output(self.motor2A, GPIO.HIGH)
+            GPIO.output(self.motor2B, GPIO.LOW)
             GPIO.output(self.motor2E, GPIO.HIGH)
         else:
             GPIO.output(self.motor1E, GPIO.LOW)
@@ -61,9 +61,10 @@ class Motors:
             GPIO.output(self.motor1B, GPIO.LOW)
             GPIO.output(self.motor1E, GPIO.HIGH)
 
-            GPIO.output(self.motor2A, GPIO.LOW)
-            GPIO.output(self.motor2B, GPIO.HIGH)
+            GPIO.output(self.motor2A, GPIO.HIGH)
+            GPIO.output(self.motor2B, GPIO.LOW)
             GPIO.output(self.motor2E, GPIO.HIGH)
+
         else:
             GPIO.output(self.motor1E, GPIO.LOW)
             GPIO.output(self.motor2E, GPIO.LOW)
@@ -77,8 +78,8 @@ class Motors:
             GPIO.output(self.motor1B, GPIO.HIGH)
             GPIO.output(self.motor1E, GPIO.HIGH)
 
-            GPIO.output(self.motor2A, GPIO.HIGH)
-            GPIO.output(self.motor2B, GPIO.LOW)
+            GPIO.output(self.motor2A, GPIO.LOW)
+            GPIO.output(self.motor2B, GPIO.HIGH)
             GPIO.output(self.motor2E, GPIO.HIGH)
         else:
             GPIO.output(self.motor1E, GPIO.LOW)

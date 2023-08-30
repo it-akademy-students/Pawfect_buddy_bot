@@ -71,5 +71,5 @@ class Distance:
         # et on divise par deux car il s'agit d'un aller et retour. #
         return (TimeElapsed * 34300) / 2
  
- 
+
 
