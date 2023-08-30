@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './views/Header';
 import InscriptionController from './controllers/InscriptionController';
