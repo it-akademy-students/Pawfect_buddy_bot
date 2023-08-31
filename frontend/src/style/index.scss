@@ -1,0 +1,125 @@
+@import "variables";
+
+body {
+  margin: 0;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  .pbb-icon {
+    stroke: $rose-framboise;
+    width: 15px;
+  }
+
+  #log-out {
+    stroke: $rose-framboise;
+    width: 20px;
+    height: 20px;
+    background-size: 20px;
+    margin: 0 0 0 1rem;
+    background-image: url("../../public/icons/log_out.svg");
+  }
+
+  .header-item {
+    display: flex;
+    align-items: center;
+    /* Ajoutez d'autres styles pour l'élément du header */
+  }
+
+  .header-icon {
+    width: 16px;
+    height: 16px;
+    /* Ajoutez d'autres styles pour l'icône */
+  }
+
+  .header-text {
+    margin-left: 12px; /* Espacement entre l'icône et le texte */
+    /* Ajoutez d'autres styles pour le texte */
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.bg-pink {
+  background-color: $rose-bonbon;
+}
+.bg-blue {
+  background-color: $bleu-givre;
+}
+.bg-extra-light-blue {
+  background-color: $light-bleu-givre;
+}
+.bg-pale {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.pink {
+  color: $rose-bonbon;
+}
+.dark-pink {
+  color: $rose-framboise;
+}
+.light-pink {
+  color: $rose-dragee;
+}
+.blue {
+  color: $bleu-givre;
+}
+.dark-blue {
+  color: $bleu-canard;
+}
+
+button:hover, 
+input[type=submit]:hover {
+  background-color: $bleu-givre;
+}
+button:active, 
+input[type=submit]:active,
+button:focus, 
+input[type=submit]:focus {
+  background-color: $rose-framboise;
+  color: $rose-dragee;
+}
+input::placeholder {
+  color: white;
+}
+nav ul{
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+
+.nav-item {
+  padding: 0 0 1rem 3rem !important;
+}
+
+.nav-link, .nav {
+  text-decoration: none !important;
+  color: $rose-framboise !important;
+  font-weight: 500 !important;
+}
+.nav-link:focus {
+  text-decoration: underline !important;
+  color: $rose-framboise !important;
+}
+.nav-link:hover {
+  color: $rose-dragee !important;
+}
+
+input, button {
+  border: 0px;
+}
+
+.br-rad {
+  border-radius : 5% 5% 5% 5%;
+}
+
+.a-white {
+  color: #ffffff;
+}
