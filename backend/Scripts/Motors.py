@@ -3,7 +3,6 @@ from time import sleep
 
 class Motors:
     def __init__(self) -> None:
-        GPIO.cleanup() 
         GPIO.setmode(GPIO.BCM)
 
         self.motor1A = 20 # IN1
@@ -24,7 +23,7 @@ class Motors:
 
 
     def avancer(self, activate):
-        if activate == 'true':
+        if activate == True:
             GPIO.output(self.motor1A, GPIO.HIGH)
             GPIO.output(self.motor1B, GPIO.LOW)
             GPIO.output(self.motor1E, GPIO.HIGH)
@@ -36,11 +35,11 @@ class Motors:
             GPIO.output(self.motor1E, GPIO.LOW)
             GPIO.output(self.motor2E, GPIO.LOW)
 
-        return "ok"
+        return 'ok'
 
 
     def reculer(self, activate):
-        if activate == 'true':
+        if activate == True:
             GPIO.output(self.motor1A, GPIO.LOW)
             GPIO.output(self.motor1B, GPIO.HIGH)
             GPIO.output(self.motor1E, GPIO.HIGH)
@@ -52,11 +51,11 @@ class Motors:
             GPIO.output(self.motor1E, GPIO.LOW)
             GPIO.output(self.motor2E, GPIO.LOW)
 
-        return "ok"
+        return 'ok'
 
 
     def gauche(self, activate):
-        if activate == 'true':
+        if activate == True:
             GPIO.output(self.motor1A, GPIO.HIGH)
             GPIO.output(self.motor1B, GPIO.LOW)
             GPIO.output(self.motor1E, GPIO.HIGH)
@@ -69,11 +68,11 @@ class Motors:
             GPIO.output(self.motor1E, GPIO.LOW)
             GPIO.output(self.motor2E, GPIO.LOW)
 
-        return "ok"
+        return 'ok'
 
     
     def droite(self, activate):
-        if activate == 'true':
+        if activate == True:
             GPIO.output(self.motor1A, GPIO.LOW)
             GPIO.output(self.motor1B, GPIO.HIGH)
             GPIO.output(self.motor1E, GPIO.HIGH)
@@ -85,4 +84,4 @@ class Motors:
             GPIO.output(self.motor1E, GPIO.LOW)
             GPIO.output(self.motor2E, GPIO.LOW)
 
-        return "ok"
+        return 'ok'

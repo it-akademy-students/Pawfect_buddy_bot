@@ -3,6 +3,7 @@ import time
 from flask import Flask, Response, request, jsonify, make_response
 from flask_socketio import SocketIO
 from threading import Thread
+from multiprocessing import Process
 import sqlite3
 from flask_cors import CORS
 from classes.Auth import Auth
@@ -33,13 +34,10 @@ except OSError:
 from Scripts.Servo import Servo
 from Scripts.StepMotor import StepMotor
 from Scripts.Motors import Motors
-from Scripts.Micro import Micro
 
-motors = Motors()
 servo = Servo()
 stepmotor = StepMotor()
-micro = Micro()
-
+motors = Motors()
 
 def handle_components(action, data = None):
     if action == "tail_move":
@@ -47,7 +45,7 @@ def handle_components(action, data = None):
 
     if action == "give_croquettes":
         stepmotor.giveCroquettes()
-
+    
     if action == "avancer":
         activate = data
         motors.avancer(activate)
@@ -63,12 +61,92 @@ def handle_components(action, data = None):
     if action == "droite":
         activate = data
         motors.droite(activate)
-
-    if action == "activate_micro":
-        micro.activateMicro()
-  
-    
         
+
+@app.route("/")
+def web_interface():
+    html = open("web_interface.html")
+    response = html.read().replace('\n', '')
+    html.close()
+    return response
+
+
+@app.route("/avancer")
+def avancer():
+    activate = request.args.get("on")
+    from Scripts.Motors import Motors
+
+    motors = Motors()
+    return motors.avancer(activate)
+
+@app.route("/reculer")
+def reculer():
+    activate = request.args.get("on")
+    from Scripts.Motors import Motors
+
+    motors = Motors()
+    return motors.reculer(activate)
+
+@app.route("/gauche")
+def gauche():
+    activate = request.args.get("on")
+    from Scripts.Motors import Motors
+
+    motors = Motors()
+    return motors.gauche(activate)
+
+@app.route("/droite")
+def droite():
+    activate = request.args.get("on")
+    from Scripts.Motors import Motors
+
+    motors = Motors()
+    return motors.droite(activate)
+
+@app.route('/activate-micro')
+def activateMicro():
+    from Scripts.Micro import Micro
+
+    micro = Micro()
+    micro.activateMicro()
+    return "ok"
+    
+
+@app.route('/tail-move')
+def tailMove():
+    from Scripts.Servo import Servo
+
+    servo = Servo(17)
+    servo.tailMove()
+    return "ok"
+
+@app.route('/give-croquettes')
+def giveCroquettes():
+    from Scripts.StepMotor import StepMotor
+
+    stepmotor = StepMotor()
+    stepmotor.giveCroquettes()
+    return 'ok'
+
+@app.route('/toggle-camera')
+def toggleCamera():
+    import subprocess
+    subprocess.Popen(["python3", "./Scripts/StreamCamera.py"])
+    return 'ok'
+
+@app.route('/toggle-automatic-mode')
+def toggleAutoMode():
+    from Scripts.Distance import Distance
+    from Scripts.AutoMode import AutoMode
+    front = Distance()
+    front_distance = front.getFrontDistance()
+    time.sleep(0.2)
+    return "Distance mesurée = %.1f cm" % front_distance
+
+    #socketio.run(app)
+    #return app
+
+
 @socketio.on('tail_move')
 def tail_move():
     Thread(target=handle_components, args=("tail_move",), daemon=True).start()
@@ -99,15 +177,8 @@ def droite(data):
     Thread(target=handle_components, args=("droite", data,), daemon=True).start()
 
 
-@socketio.on('activate_micro')
-def activate_micro():
-    Thread(target=handle_components, args=("activate_micro",), daemon=True).start()
-
 
 if __name__ == '__main__':
-    import RPi.GPIO as GPIO
-
-    GPIO.cleanup()
     socketio.run(app, threaded=True)
 
 #   os.system("sudo rm -r  ~/.cache/chromium/Default/Cache/*")

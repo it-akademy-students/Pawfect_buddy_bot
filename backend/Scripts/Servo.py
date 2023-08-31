@@ -3,10 +3,9 @@ import time
 
 
 class Servo:
-    def __init__(self, pin):
-        self.pin = pin
-
-        GPIO.cleanup()    
+    def __init__(self):
+        self.pin = 17
+  
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.pin, GPIO.OUT)
         self.p = GPIO.PWM(self.pin, 50) #GPIO17 for PWM with 50Hz
@@ -25,5 +24,7 @@ class Servo:
             self.p.ChangeDutyCycle(7.5)
             time.sleep(0.2)
             i += 1
+
+        self.p.ChangeDutyCycle(0)
         
         

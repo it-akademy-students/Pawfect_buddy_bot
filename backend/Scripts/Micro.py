@@ -13,23 +13,23 @@ class Micro:
 
         os.system("arecord -vv -D plughw:2,0 --duration=5 > " + fullpath + filename +".wav")
         
-        try:
-            connection = sqlite3.connect('./database/database.db')
-            cursor = connection.cursor()
-
-            query = """INSERT INTO records (path,filename) VALUES (?, ?)"""
-            data_tuple = (fullpath, filename)
-            cursor.execute(query, data_tuple)
-            connection.commit()
-            cursor.close()
-
-            connection.row_factory = sqlite3.Row
-            users = connection.execute('SELECT * FROM records').fetchall()
-            data = []
-            for user in users:
-                data.append([x for x in user])
-            connection.close()
-            return data
-
-        except sqlite3.Error as error:
-            print("Failed", error) 
+        #try:
+        #    connection = sqlite3.connect('./database/database.db')
+        #    cursor = connection.cursor()
+        #
+        #    query = """INSERT INTO records (path,filename) VALUES (?, ?)"""
+        #    data_tuple = (fullpath, filename)
+        #    cursor.execute(query, data_tuple)
+        #    connection.commit()
+        #    cursor.close()
+        #
+        #    connection.row_factory = sqlite3.Row
+        #    users = connection.execute('SELECT * FROM records').fetchall()
+        #    data = []
+        #    for user in users:
+        #        data.append([x for x in user])
+        #    connection.close()
+        #    return data
+        #
+        #except sqlite3.Error as error:
+        #    print("Failed", error) 

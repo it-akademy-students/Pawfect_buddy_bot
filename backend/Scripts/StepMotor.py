@@ -3,7 +3,7 @@ import time
 
 class StepMotor:
     def __init__(self):
-        GPIO.cleanup()
+        #GPIO.cleanup()
         self.in1 = 18
         self.in2 = 23
         self.in3 = 24
@@ -53,12 +53,8 @@ class StepMotor:
         for i in range(self.step_count):
             for pin in range(0, len(self.motor_pins)):
                 GPIO.output( self.motor_pins[pin], self.step_sequence[self.motor_step_counter][pin] )
-            if self.direction==True:
-                self.motor_step_counter = (self.motor_step_counter - 1) % 8
-            elif self.direction==False:
-                self.motor_step_counter = (self.motor_step_counter + 1) % 8
-            else: # defensive programming
-                print( "uh oh... direction should *always* be either True or False" )
-                self.cleanup()
-                exit( 1 )
-            time.sleep( self.step_sleep )
+                if self.direction==True:
+                    self.motor_step_counter = (self.motor_step_counter - 1) % 8
+                elif self.direction==False:
+                    self.motor_step_counter = (self.motor_step_counter + 1) % 8
+                time.sleep( self.step_sleep )
