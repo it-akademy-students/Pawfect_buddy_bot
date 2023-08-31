@@ -73,15 +73,56 @@ a {
 .nav-link:hover {
   color: #E8AABF !important;
 }
-
 input, button {
   border: 0px;
 }
-
-.br-rad {
-  border-radius : 5% 5% 5% 5%;
-}
-
 .a-white {
   color: #ffffff;
+}
+.live-video-background {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* La vidéo occupera toute la hauteur de l'écran */
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.toggle-header-button {
+  position: absolute;
+  top: 10px; /* Ajustez cette valeur pour définir la distance depuis le haut */
+  left: 10px; /* Ajustez cette valeur pour définir la distance depuis la gauche */
+  z-index: 1; /* Pour que le bouton apparaisse au-dessus du flux en direct */
+  background-color: #C93C67; /* Couleur du bouton */
+  border: none;
+  cursor: pointer;
+  color: white; /* Couleur du texte du bouton */
+  padding: 5px 10px; /* Ajoutez de la marge intérieure pour améliorer l'apparence */
+  border-radius: 5px; /* Ajoutez des coins arrondis pour le bouton */
+  transition: background-color 0.3s ease; /* Transition de la couleur au survol */
+}
+.toggle-header-button:hover {
+  background-color: #E8AABF; /* Couleur au survol */
+}
+.header-container {
+  position: absolute;
+  top: 60px; /* Ajustez cette valeur pour définir la distance depuis le haut */
+  left: 50px; /* Ajustez cette valeur pour définir la distance depuis la gauche */
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+.header-container.show {
+  opacity: 1;
+  visibility: visible;
+}
+.app-container {
+  position: relative;
+  display: flex; /* Utiliser Flexbox pour aligner les éléments horizontalement */
+  flex-direction: column; /* Aligner les éléments en colonne */
+  align-items: flex-start; /* Aligner les éléments à gauche */
+  /* Ajoutez d'autres styles au besoin */
 }
