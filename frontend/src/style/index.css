@@ -32,6 +32,9 @@ body .header-text {
   margin-left: 12px; /* Espacement entre l'icône et le texte */
   /* Ajoutez d'autres styles pour le texte */
 }
+body .active-paw::before {
+  background-image: url("../../public/icons/paw.svg");
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
