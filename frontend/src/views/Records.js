@@ -1,11 +1,11 @@
-import { IonCheckbox } from '@ionic/react';
 import React from 'react';
 
 const Record = () => {
   return (
-    <div class='bg-pink'>
+    <div className='d-flex justify-content-center align-items-center vh-100'>
+      <div className='bg-pink fs-4 text-white rounded-5 w-50 p-3'>
         <h2>My Records</h2>
-        <h3>Audio(s)</h3>
+        <h3 className='fw-light'>Audio(s)</h3>
         <form method='POST' action=''>
           <table>
             <thead>
@@ -22,11 +22,14 @@ const Record = () => {
                     <td></td>
                 </tr>
             </tbody>
-            <button className='bg-blue dark-pink'>Download selected</button>
-            <button className='bg-blue dark-pink'>Delete selected</button>
+            <div>
+              <button className='bg-blue dark-pink rounded m-2 fs-4'>Download selected</button>
+              <button className='bg-blue dark-pink rounded m-2 fs-4'>Delete selected</button>
+            </div>
           </table>
         </form>
       </div>
+    </div>
   );
 };
 

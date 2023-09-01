@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.bg-pink {
+  background-color: #DB698F;
+}
+.bg-blue {
+  background-color: #AAD9DD;
+}
+.bg-extra-light-blue {
+  background-color: #E6EFEF;
+}
+.bg-pale {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.pink {
+  color: #DB698F;
+}
+.dark-pink {
+  color: #C93C67;
+}
+.light-pink {
+  color: #E8AABF;
+}
+.blue {
+  color: #AAD9DD;
+}
+.dark-blue {
+  color: #4AA3A3;
+}
+
+button:hover, 
+input[type=submit]:hover {
+  background-color: rgba(170, 217, 221, 0.8);
+}
+button:active, 
+input[type=submit]:active,
+button:focus, 
+input[type=submit]:focus {
+  background-color: #C93C67;
+  color: #E8AABF;
+}
+input::placeholder {
+  color: white;
+}
+nav ul{
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+.nav-link, .nav {
+  text-decoration: none !important;
+  color: #C93C67 !important;
+  font-weight: 500 !important;
+}
+.nav-link:active {
+  text-decoration: underline !important;
+  color: #C93C67 !important;
+}
+.nav-link:hover {
+  color: #E8AABF !important;
+}
+input, button {
+  border: 0px;
+}
+.a-white {
+  color: #ffffff;
+}
+.live-video-background {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* La vidéo occupera toute la hauteur de l'écran */
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.toggle-header-button {
+  position: absolute;
+  top: 10px; /* Ajustez cette valeur pour définir la distance depuis le haut */
+  left: 10px; /* Ajustez cette valeur pour définir la distance depuis la gauche */
+  z-index: 1; /* Pour que le bouton apparaisse au-dessus du flux en direct */
+  background-color: #C93C67; /* Couleur du bouton */
+  border: none;
+  cursor: pointer;
+  color: white; /* Couleur du texte du bouton */
+  padding: 5px 10px; /* Ajoutez de la marge intérieure pour améliorer l'apparence */
+  border-radius: 5px; /* Ajoutez des coins arrondis pour le bouton */
+  transition: background-color 0.3s ease; /* Transition de la couleur au survol */
+}
+.toggle-header-button:hover {
+  background-color: #E8AABF; /* Couleur au survol */
+}
+.header-container {
+  position: absolute;
+  top: 60px; /* Ajustez cette valeur pour définir la distance depuis le haut */
+  left: 50px; /* Ajustez cette valeur pour définir la distance depuis la gauche */
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+.header-container.show {
+  opacity: 1;
+  visibility: visible;
+}
+.app-container {
+  position: relative;
+  display: flex; /* Utiliser Flexbox pour aligner les éléments horizontalement */
+  flex-direction: column; /* Aligner les éléments en colonne */
+  align-items: flex-start; /* Aligner les éléments à gauche */
+  /* Ajoutez d'autres styles au besoin */
+}
